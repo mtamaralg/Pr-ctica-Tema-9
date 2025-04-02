@@ -86,4 +86,8 @@ public class categoriaController {
     @FXML
     public void evento() throws IOException {
         App.setRoot("evento");}
+
+    @FXML
+    public void participante() throws IOException {
+        App.setRoot("participante");}
 }

@@ -25,28 +25,52 @@ public class participanteController {
     private TableColumn<Participante, String> emailParticipante;
 
     @FXML
-    private TableColumn<Participante, String> id_PersonaEvento;
+    private TableColumn<Participante,String> nombreParticipante;
+
+    @FXML
+    private TableColumn<Participante,String> apellido1Participante;
+
+    @FXML
+    private TableColumn<Participante,String> apellido2Participante;
+
+   
 
     private ObservableList<Participante> listaParticipantes = FXCollections.observableArrayList();
 
     public void initialize(){
         idParticipante.setCellValueFactory(new PropertyValueFactory<>("id_Participante"));
         emailParticipante.setCellValueFactory(new PropertyValueFactory<>("email"));
-        id_PersonaEvento.setCellValueFactory(new PropertyValueFactory<>("id_PersonaEvento"));
+        nombreParticipante.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        apellido1Participante.setCellValueFactory(new PropertyValueFactory<>("apellido1"));
+        apellido2Participante.setCellValueFactory(new PropertyValueFactory<>("apellido2"));
 
         emailParticipante.setCellFactory(TextFieldTableCell.forTableColumn());
-        id_PersonaEvento.setCellFactory(TextFieldTableCell.forTableColumn());
+        nombreParticipante.setCellFactory(TextFieldTableCell.forTableColumn());
+        apellido1Participante.setCellFactory(TextFieldTableCell.forTableColumn());
+        apellido2Participante.setCellFactory(TextFieldTableCell.forTableColumn());
+
 
         emailParticipante.setOnEditCommit(event -> {
             Participante participante = event.getRowValue();
             participante.setFecha(event.getNewValue());
             saveRow(participante);
         });
-        id_PersonaEvento.setOnEditCommit(event -> {
+        nombreParticipante.setOnEditCommit(event -> {
             Participante participante = event.getRowValue();
-            participante.setId_Evento(Integer.parseInt(event.getNewValue()));
+            participante.setNombre(event.getNewValue());
             saveRow(participante);
         });
+        apellido1Participante.setOnEditCommit(event -> {
+            Participante participante = event.getRowValue();
+            participante.setApellido1(event.getNewValue());
+            saveRow(participante);
+        });
+        apellido2Participante.setOnEditCommit(event -> {
+            Participante participante = event.getRowValue();
+            participante.setApellido2(event.getNewValue());
+            saveRow(participante);
+        });
+       
         tablaParticipante.setItems(Participante.listaParticipantes);
         loadData();
     }

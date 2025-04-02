@@ -13,31 +13,31 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class Participante extends Persona {
-    private int id_Participante;
-    private String email;
+    private IntegerProperty id_Participante;
+    private StringProperty email;
 
 
     public Participante(int id, String nombre, String apellido1, String apellido2, int id_Participante, String email) {
         super(id, nombre, apellido1, apellido2);
-        this.id_Participante = id_Participante;
-        this.email = email;
+        this.id_Participante = new SimpleIntegerProperty(id_Participante);
+        this.email = new SimpleStringProperty(email);
     }
 
 
     public void setId_Evento(int id_Participante) {
-        this.id_Participante = id_Participante;
+        this.id_Participante.set(id_Participante);
     }
     
     public void setFecha(String email) {
-        this.email = email;
+        this.email.set(email);
     }
 
     public int getId_Evento() {
-        return id_Participante;
+        return id_Participante.get();
     }
 
     public String getFecha() {
-        return email;
+        return email.get();
     }
     static ObservableList<Participante> listaParticipantes = FXCollections.observableArrayList();
     @Override
