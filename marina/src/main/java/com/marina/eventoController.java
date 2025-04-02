@@ -132,4 +132,10 @@ public class eventoController {
         @FXML
         public void Categoria() throws IOException {
             App.setRoot("categoria");}
+        @FXML
+        public void Participante() throws IOException {
+            App.setRoot("participante");}
+        @FXML
+        public void Evento() throws IOException {
+            App.setRoot("evento");}
 }

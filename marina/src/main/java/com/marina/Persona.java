@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public abstract class Persona {
-    private IntegerProperty id;
+    private static IntegerProperty id;
     private StringProperty nombre;
     private StringProperty apellido1;
     private StringProperty apellido2;
@@ -39,7 +39,7 @@ public abstract class Persona {
     public void setApellido2(String apellido2) {
         this.apellido2.set(apellido2);
     }
-    public int getId() {
+    public static int getId() {
         return id.get();
     }
     public String getNombre() {

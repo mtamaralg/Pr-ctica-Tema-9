@@ -39,7 +39,7 @@ public class Participante extends Persona {
     public String getFecha() {
         return email;
     }
-    ObservableList<Participante> listaParticipantes = FXCollections.observableArrayList();
+    static ObservableList<Participante> listaParticipantes = FXCollections.observableArrayList();
     @Override
     public Persona get(int id) {
         Connection con = conectarBD();
@@ -59,8 +59,7 @@ public class Participante extends Persona {
         return participante;
     }
 
-    @Override
-    public void getAll() {
+    public static void getAll(ObservableList<Participante> listaParticipantes) {
         Connection con = conectarBD();
         Participante participante = null;
         try {
@@ -135,6 +134,13 @@ public class Participante extends Persona {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+
+    @Override
+    public void getAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
 
