@@ -80,7 +80,7 @@ public abstract class Persona {
         Connection con = null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/practica","root","root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/practica9","root","root");
         }catch(Exception e){
             System.out.println(e);
         }

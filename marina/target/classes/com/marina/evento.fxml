@@ -16,12 +16,12 @@
          <menus>
             <Menu mnemonicParsing="false" text="Evento">
                <items>
-                  <MenuItem fx:id="categoria" mnemonicParsing="false" onAction="#Categoria" text="Evento" />
+                  <MenuItem mnemonicParsing="false" text="Evento" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Categoria">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Categoria" />
+                  <MenuItem fx:id="categoria" mnemonicParsing="false" onAction="#Categoria" text="Categoria" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Participante">
@@ -33,7 +33,7 @@
       </MenuBar>
       <HBox alignment="CENTER" prefHeight="531.0" prefWidth="757.0" HBox.hgrow="ALWAYS">
          <children>
-            <TableView fx:id="tablaEvento" prefHeight="502.0" prefWidth="757.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tablaEvento" editable="true" prefHeight="502.0" prefWidth="757.0" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="idEventoColumna" prefWidth="75.0" text="Id" />
                 <TableColumn fx:id="nombreEvento" prefWidth="75.0" text="Nombre" />

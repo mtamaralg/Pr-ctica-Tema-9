@@ -44,7 +44,7 @@ public class eventoController {
     public void initialize(){
         idEventoColumna.setCellValueFactory(new PropertyValueFactory<>("id"));
         nombreEvento.setCellValueFactory(new PropertyValueFactory<>("nombre"));
-        descriptionEvento.setCellValueFactory(new PropertyValueFactory<>("description"));
+        descriptionEvento.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         lugarEvento.setCellValueFactory(new PropertyValueFactory<>("lugar"));
         fecha_inicioEvento.setCellValueFactory(new PropertyValueFactory<>("fecha_inicio"));
         fecha_finEvento.setCellValueFactory(new PropertyValueFactory<>("fecha_fin"));
@@ -55,6 +55,7 @@ public class eventoController {
         lugarEvento.setCellFactory(TextFieldTableCell.forTableColumn());
         fecha_inicioEvento.setCellFactory(TextFieldTableCell.forTableColumn());
         fecha_finEvento.setCellFactory(TextFieldTableCell.forTableColumn());
+        id_categoriaEventoColumna.setCellFactory(TextFieldTableCell.forTableColumn(new javafx.util.converter.IntegerStringConverter()));
 
         nombreEvento.setOnEditCommit(event -> {
             Evento evento = event.getRowValue();
@@ -95,7 +96,7 @@ public class eventoController {
 
         @FXML
         public void addRow() {
-            Evento evento = new Evento(Evento.getLastId() + 1, "", "", "", "", "", 0);
+            Evento evento = new Evento(Evento.getLastId() + 1, "", "", "", "", "", 1);
             listaEventos.add(evento);
             tablaEvento.getSelectionModel().select(evento);
             tablaEvento.edit(tablaEvento.getSelectionModel().getSelectedIndex(), nombreEvento);

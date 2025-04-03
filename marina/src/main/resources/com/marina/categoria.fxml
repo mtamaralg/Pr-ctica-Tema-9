@@ -44,8 +44,8 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="49.0" prefWidth="757.0">
          <children>
-            <Button fx:id="anadir" mnemonicParsing="false" onAction="#addRow" text="Añadir" />
-            <Button fx:id="borrarcat" mnemonicParsing="false" onAction="#deleteRow" text="Borrar">
+            <Button fx:id="añadircategoria" mnemonicParsing="false" onAction="#addRow" text="Añadir" />
+            <Button fx:id="borrarcategoria" mnemonicParsing="false" onAction="#deleteRow" text="Borrar">
                <HBox.margin>
                   <Insets left="50.0" />
                </HBox.margin>

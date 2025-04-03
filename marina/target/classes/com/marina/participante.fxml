@@ -33,7 +33,7 @@
       </MenuBar>
       <HBox alignment="CENTER" prefHeight="312.0" prefWidth="964.0" HBox.hgrow="ALWAYS">
          <children>
-            <TableView fx:id="tablaParticipante" prefHeight="381.0" prefWidth="757.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tablaParticipante"  prefHeight="381.0" prefWidth="757.0" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="idParticipante" prefWidth="75.0" text="Id" />
                 <TableColumn fx:id="nombreParticipante" prefWidth="75.0" text="Nombre" />
@@ -49,8 +49,8 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="81.0" prefWidth="757.0">
          <children>
-            <Button mnemonicParsing="false" text="Añadir" />
-            <Button mnemonicParsing="false" text="Borrar">
+            <Button fx:id="añadirparticipante" mnemonicParsing="false" onAction="#addRow" text="Añadir" />
+            <Button fx:id="borrarparticipante" mnemonicParsing="false" onAction="#deleteRow" text="Borrar">
                <HBox.margin>
                   <Insets left="50.0" />
                </HBox.margin>
