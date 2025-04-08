@@ -14,43 +14,42 @@ import java.sql.Statement;
 
 public class Participante extends Persona {
     private IntegerProperty id_Participante;
-    private StringProperty email;
+    private StringProperty correo;
 
 
-    public Participante(int id, String nombre, String apellido1, String apellido2, int id_Participante, String email) {
+    public Participante(int id, String nombre, String apellido1, String apellido2, String email) {
         super(id, nombre, apellido1, apellido2);
-        this.id_Participante = new SimpleIntegerProperty(id_Participante);
-        this.email = new SimpleStringProperty(email);
+        this.id_Participante = new SimpleIntegerProperty(id);
+        this.correo = new SimpleStringProperty(email);
     }
 
 
-    public void setId_Evento(int id_Participante) {
+    public void setid_participante(int id_Participante) {
         this.id_Participante.set(id_Participante);
     }
     
-    public void setFecha(String email) {
-        this.email.set(email);
+    public void setemail(String email) {
+        this.correo.set(email);
     }
 
-    public int getId_Evento() {
+    public int getid_participante() {
         return id_Participante.get();
     }
 
-    public String getFecha() {
-        return email.get();
+    public String getemail() {
+        return correo.get();
     }
-    static ObservableList<Participante> listaParticipantes = FXCollections.observableArrayList();
     @Override
     public Persona get(int id) {
         Connection con = conectarBD();
         Participante participante = null;
         try {
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM PARTICIPANTE WHERE id = " + id);
+            ResultSet rs = st.executeQuery("SELECT * FROM PARTICIPANTE INNER JOIN PERSONA ON PARTICIPANTE.id = PERSONA.ID WHERE id = " + id);
             if (rs.next()) {
-                participante = new Participante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getInt("id_Participante"), rs.getString("email"));
+                participante = new Participante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("email"));
             } else {
-                participante = new Participante(0, "", "", "", 0, "");
+                participante = new Participante(0, "", "", "", "");
             }
             con.close();
         } catch (Exception e) {
@@ -64,16 +63,19 @@ public class Participante extends Persona {
         Participante participante = null;
         try {
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM PARTICIPANTE");
+            ResultSet rs = st.executeQuery("SELECT * FROM PARTICIPANTE INNER JOIN PERSONA ON PARTICIPANTE.id = PERSONA.id");
             while (rs.next()) {
-                participante = new Participante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getInt("id_Participante"), rs.getString("email"));
+                System.out.println(rs.getInt("id") + " " + rs.getString("nombre") + " " + rs.getString("apellido1") + " " + rs.getString("apellido2") + " " + rs.getString("email"));
+                participante = new Participante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("email"));
                 listaParticipantes.add(participante);
+                System.out.println("Participante: " + participante.getNombre() + " " + participante.getApellido1() + " " + participante.getApellido2() + " " + participante.getemail());
             }
             con.close();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
+    
 
     @Override
     public int save() {
@@ -83,10 +85,12 @@ public class Participante extends Persona {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM PARTICIPANTE WHERE id = " + this.getId());
             if (rs.next()) {
-                st.executeUpdate("UPDATE PARTICIPANTE SET nombre = '" + this.getNombre() + "', apellido1 = '" + this.getApellido1() + "', apellido2 = '" + this.getApellido2() + "', id_Participante = " + this.getId_Evento() + ", email = '" + this.getFecha() + "' WHERE id = " + this.getId());
+                st.executeUpdate("UPDATE PARTICIPANTE SET email = '" + this.getemail() + "' WHERE id = " + this.getId());
+                st.executeUpdate("UPDATE PERSONA SET nombre = '" + this.getNombre() + "' , apellido1 = '" + this.getApellido1() + "', apellido2 = '" + this.getApellido2() + "' WHERE id = " + this.getId()); 
                 result = 1;
             } else {
-                st.executeUpdate("INSERT INTO PARTICIPANTE (nombre, apellido1, apellido2, id_Participante, email) VALUES ('" + this.getNombre() + "', '" + this.getApellido1() + "', '" + this.getApellido2() + "', " + this.getId_Evento() + ", '" + this.getFecha() + "')");
+                st.executeUpdate("INSERT INTO PARTICIPANTE ( id, email) VALUES (" + this.getid_participante() + ", '" + this.getemail() + "')");
+                st.execute("INSERT INTO PERSONA (id, nombre, apellido1, apellido2) VALUES (" + this.getId() + ", '" + this.getNombre() + "', '" + this.getApellido1() + "', '" + this.getApellido2() + "')");
                 result = 1;
             }
             con.close();            
@@ -129,7 +133,7 @@ public class Participante extends Persona {
         Connection con = conectarBD();
         try {
             Statement st = con.createStatement();
-            st.executeUpdate("INSERT INTO PARTICIPA (id_Evento, id_Participante, fecha) VALUES (" + this.getId_Evento() + ", " + this.getId() + ", '" + this.getFecha() + "')");
+            st.executeUpdate("INSERT INTO PARTICIPA (evento_id, persona_id, fecha) VALUES (" + this.getid_participante() + ", " + this.getId() + ", '" + this.getemail() + "')");
             con.close();
         } catch (Exception e) {
             System.out.println(e);
@@ -140,7 +144,7 @@ public class Participante extends Persona {
     @Override
     public void getAll() {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        
     }
 
 

@@ -38,23 +38,23 @@ public class participanteController {
     private ObservableList<Participante> listaParticipantes = FXCollections.observableArrayList();
 
     public void initialize(){
-        idParticipante.setCellValueFactory(new PropertyValueFactory<>("id_Participante"));
-        emailParticipante.setCellValueFactory(new PropertyValueFactory<>("email"));
+        idParticipante.setCellValueFactory(new PropertyValueFactory<>("id"));
         nombreParticipante.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         apellido1Participante.setCellValueFactory(new PropertyValueFactory<>("apellido1"));
         apellido2Participante.setCellValueFactory(new PropertyValueFactory<>("apellido2"));
+        emailParticipante.setCellValueFactory(new PropertyValueFactory<>("correo"));
 
-        emailParticipante.setCellFactory(TextFieldTableCell.forTableColumn());
+       // emailParticipante.setCellFactory(TextFieldTableCell.forTableColumn());
         nombreParticipante.setCellFactory(TextFieldTableCell.forTableColumn());
         apellido1Participante.setCellFactory(TextFieldTableCell.forTableColumn());
         apellido2Participante.setCellFactory(TextFieldTableCell.forTableColumn());
 
 
-        emailParticipante.setOnEditCommit(event -> {
-            Participante participante = event.getRowValue();
-            participante.setFecha(event.getNewValue());
-            saveRow(participante);
-        });
+        // emailParticipante.setOnEditCommit(event -> {
+        //     Participante participante = event.getRowValue();
+        //     participante.setemail(event.getNewValue());
+        //     saveRow(participante);
+        // });
         nombreParticipante.setOnEditCommit(event -> {
             Participante participante = event.getRowValue();
             participante.setNombre(event.getNewValue());
@@ -71,20 +71,20 @@ public class participanteController {
             saveRow(participante);
         });
        
-        tablaParticipante.setItems(Participante.listaParticipantes);
+        tablaParticipante.setItems(listaParticipantes);
         loadData();
+        
     }
 
     private void loadData() {
-        Participante.getAll(Participante.listaParticipantes);
+        Participante.getAll(listaParticipantes);
     }
 
     @FXML
     public void addRow() {
-        Participante participante = new Participante(Participante.getId() + 1, "", "", "", 0, "");
+        Participante participante = new Participante(Participante.getId() + 1, "", "", "", "");
         listaParticipantes.add(participante);
-        tablaParticipante.scrollTo(participante);
-        tablaParticipante.edit(tablaParticipante.getItems().size() - 1, emailParticipante);
+        
     }
 
     public void saveRow(Participante participante) {
