@@ -7,10 +7,11 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="499.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marina.categoriaController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marina.categoriaController">
    <children>
       <MenuBar prefHeight="28.0" VBox.vgrow="NEVER">
          <menus>
@@ -29,9 +30,15 @@
                   <MenuItem fx:id="participante" mnemonicParsing="false" onAction="#participante" text="Participante" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Artista">
+               <items>
+                  <MenuItem fx:id="artista" mnemonicParsing="false" onAction="#artista" text="Artista" />
+               </items>
+            </Menu>
          </menus>
       </MenuBar>
-      <HBox alignment="CENTER" prefHeight="429.0" prefWidth="757.0" HBox.hgrow="ALWAYS">
+      <TextField fx:id="buscar" onKeyReleased="#Buscar" />
+      <HBox alignment="CENTER" prefHeight="531.0" prefWidth="757.0" HBox.hgrow="ALWAYS">
          <children>
             <TableView fx:id="tablaCategoria" editable="true" onSort="#deleteRow" prefHeight="381.0" prefWidth="757.0" VBox.vgrow="ALWAYS">
               <columns>
@@ -42,7 +49,7 @@
             </TableView>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="49.0" prefWidth="757.0">
+      <HBox alignment="CENTER" prefHeight="67.0" prefWidth="757.0">
          <children>
             <Button fx:id="añadircategoria" mnemonicParsing="false" onAction="#addRow" text="Añadir" />
             <Button fx:id="borrarcategoria" mnemonicParsing="false" onAction="#deleteRow" text="Borrar">

@@ -24,19 +24,19 @@ public class Participante extends Persona {
     }
 
 
-    public void setid_participante(int id_Participante) {
+    public void setId_Participante(int id_Participante) {
         this.id_Participante.set(id_Participante);
     }
     
-    public void setemail(String email) {
+    public void setCorreo(String email) {
         this.correo.set(email);
     }
 
-    public int getid_participante() {
+    public int getId_Participante() {
         return id_Participante.get();
     }
 
-    public String getemail() {
+    public String getCorreo() {
         return correo.get();
     }
     @Override
@@ -58,6 +58,23 @@ public class Participante extends Persona {
         return participante;
     }
 
+    public static void get(String txt, ObservableList<Participante> listaParticipantes){
+
+        Connection con = conectarBD();
+        listaParticipantes.clear();
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM PARTICIPANTE INNER JOIN PERSONA ON PARTICIPANTE.id = PERSONA.id WHERE nombre LIKE '%" + txt + "%' OR apellido1 LIKE '%" + txt + "%' OR apellido2 LIKE '%" + txt + "%' OR email LIKE '%" + txt + "%'");
+            while (rs.next()) {
+                Participante p = new Participante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("email"));
+                listaParticipantes.add(p);
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Error de SQL: " + e.getMessage());
+        }
+    }
+
     public static void getAll(ObservableList<Participante> listaParticipantes) {
         Connection con = conectarBD();
         Participante participante = null;
@@ -68,7 +85,7 @@ public class Participante extends Persona {
                 System.out.println(rs.getInt("id") + " " + rs.getString("nombre") + " " + rs.getString("apellido1") + " " + rs.getString("apellido2") + " " + rs.getString("email"));
                 participante = new Participante(rs.getInt("id"), rs.getString("nombre"), rs.getString("apellido1"), rs.getString("apellido2"), rs.getString("email"));
                 listaParticipantes.add(participante);
-                System.out.println("Participante: " + participante.getNombre() + " " + participante.getApellido1() + " " + participante.getApellido2() + " " + participante.getemail());
+                System.out.println("Participante: " + participante.getNombre() + " " + participante.getApellido1() + " " + participante.getApellido2() + " " + participante.getCorreo());
             }
             con.close();
         } catch (Exception e) {
@@ -85,12 +102,14 @@ public class Participante extends Persona {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM PARTICIPANTE WHERE id = " + this.getId());
             if (rs.next()) {
-                st.executeUpdate("UPDATE PARTICIPANTE SET email = '" + this.getemail() + "' WHERE id = " + this.getId());
                 st.executeUpdate("UPDATE PERSONA SET nombre = '" + this.getNombre() + "' , apellido1 = '" + this.getApellido1() + "', apellido2 = '" + this.getApellido2() + "' WHERE id = " + this.getId()); 
+                st.executeUpdate("UPDATE PARTICIPANTE SET email = '" + this.getCorreo() + "' WHERE id = " + this.getId());
+
                 result = 1;
             } else {
-                st.executeUpdate("INSERT INTO PARTICIPANTE ( id, email) VALUES (" + this.getid_participante() + ", '" + this.getemail() + "')");
                 st.execute("INSERT INTO PERSONA (id, nombre, apellido1, apellido2) VALUES (" + this.getId() + ", '" + this.getNombre() + "', '" + this.getApellido1() + "', '" + this.getApellido2() + "')");
+                st.executeUpdate("INSERT INTO PARTICIPANTE ( id, email) VALUES (" + this.getId_Participante() + ", '" + this.getCorreo() + "')");
+
                 result = 1;
             }
             con.close();            
@@ -107,7 +126,7 @@ public class Participante extends Persona {
         int result = 0;
         try {
             Statement st = con.createStatement();
-            st.executeUpdate("DELETE FROM PARTICIPANTE WHERE id = " + this.getId());
+            st.executeUpdate("DELETE FROM PARTICIPANTE WHERE id = " + this.getId_Participante());
             result = 1;
             con.close();
         } catch (Exception e) {
@@ -129,11 +148,11 @@ public class Participante extends Persona {
         return con;
     }
 
-    public void participa(int id_Evento, int id_Participante, String fecha) {
+    public void participa(int id_evento, int id_persona, String fecha) {
         Connection con = conectarBD();
         try {
             Statement st = con.createStatement();
-            st.executeUpdate("INSERT INTO PARTICIPA (evento_id, persona_id, fecha) VALUES (" + this.getid_participante() + ", " + this.getId() + ", '" + this.getemail() + "')");
+            st.executeUpdate("INSERT INTO PARTICIPA (id_evento, id_persona, fecha) VALUES (" + this.getId_Participante() + ", " + this.getId() + ", '" + "20/05/2025"+ "')");
             con.close();
         } catch (Exception e) {
             System.out.println(e);

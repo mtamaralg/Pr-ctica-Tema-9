@@ -7,6 +7,7 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -29,8 +30,14 @@
                   <MenuItem fx:id="participante" mnemonicParsing="false" onAction="#Participante" text="Participante" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Artista">
+               <items>
+                  <MenuItem fx:id="artista" mnemonicParsing="false" onAction="#Artista" text="Artista" />
+               </items>
+            </Menu>
          </menus>
       </MenuBar>
+      <TextField fx:id="buscar" onKeyReleased="#Buscar" />
       <HBox alignment="CENTER" prefHeight="531.0" prefWidth="757.0" HBox.hgrow="ALWAYS">
          <children>
             <TableView fx:id="tablaEvento" editable="true" prefHeight="502.0" prefWidth="757.0" VBox.vgrow="ALWAYS">

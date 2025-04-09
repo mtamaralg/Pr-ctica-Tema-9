@@ -7,10 +7,11 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marina.participanteController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marina.participanteController">
    <children>
       <MenuBar prefHeight="28.0" VBox.vgrow="NEVER">
          <menus>
@@ -29,11 +30,17 @@
                   <MenuItem mnemonicParsing="false" text="Participante" />
                </items>
             </Menu>
+            <Menu mnemonicParsing="false" text="Artista">
+               <items>
+                  <MenuItem fx:id="artista" mnemonicParsing="false" onAction="#artista" text="Artista" />
+               </items>
+            </Menu>
          </menus>
       </MenuBar>
-      <HBox alignment="CENTER" prefHeight="312.0" prefWidth="964.0" HBox.hgrow="ALWAYS">
+      <TextField fx:id="buscar" onKeyReleased="#Buscar" />
+      <HBox alignment="CENTER" prefHeight="531.0" prefWidth="757.0" HBox.hgrow="ALWAYS">
          <children>
-            <TableView fx:id="tablaParticipante"  prefHeight="381.0" prefWidth="757.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tablaParticipante" editable="true" prefHeight="381.0" prefWidth="757.0" VBox.vgrow="ALWAYS">
               <columns>
                 <TableColumn fx:id="idParticipante" prefWidth="75.0" text="Id" />
                 <TableColumn fx:id="nombreParticipante" prefWidth="75.0" text="Nombre" />
@@ -41,13 +48,11 @@
                 <TableColumn fx:id="apellido2Participante" prefWidth="75.0" text="Apellido2" />
                 <TableColumn fx:id="emailParticipante" prefWidth="75.0" text="correo" />
               </columns>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
+               
             </TableView>
          </children>
       </HBox>
-      <HBox alignment="CENTER" prefHeight="81.0" prefWidth="757.0">
+      <HBox alignment="CENTER" prefHeight="67.0" prefWidth="757.0">
          <children>
             <Button fx:id="añadirparticipante" mnemonicParsing="false" onAction="#addRow" text="Añadir" />
             <Button fx:id="borrarparticipante" mnemonicParsing="false" onAction="#deleteRow" text="Borrar">

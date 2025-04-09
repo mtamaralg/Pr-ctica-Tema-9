@@ -62,6 +62,23 @@ public class Categoria {
         return categoria;
     }
 
+    public static void get(String txt, ObservableList<Categoria> listaCategorias){
+
+        Connection con = conectarBD();
+        listaCategorias.clear();
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM CATEGORIA WHERE nombre LIKE '%" + txt + "%' OR descripcion LIKE '%" + txt + "%'" );
+            while (rs.next()) {
+                Categoria c = new Categoria(rs.getInt("id"), rs.getString("nombre"), rs.getString("descripcion"));
+                listaCategorias.add(c);
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Error de SQL: " + e.getMessage());
+        }
+    }
+
     public static void getAll(ObservableList<Categoria> listaCategorias){
         Connection con = conectarBD();
         listaCategorias.clear();

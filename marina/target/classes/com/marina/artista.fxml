@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marina.participanteController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.marina.artistaController">
    <children>
       <MenuBar prefHeight="28.0" VBox.vgrow="NEVER">
          <menus>
@@ -27,7 +27,7 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Participante">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Participante" />
+                  <MenuItem fx:id="participante" mnemonicParsing="false" onAction="#participante" text="Participante" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Artista">
@@ -40,13 +40,14 @@
       <TextField fx:id="buscar" onKeyReleased="#Buscar" />
       <HBox alignment="CENTER" prefHeight="531.0" prefWidth="757.0" HBox.hgrow="ALWAYS">
          <children>
-            <TableView fx:id="tablaParticipante" editable="true" prefHeight="381.0" prefWidth="757.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tablaArtista" editable="true" prefHeight="381.0" prefWidth="757.0" VBox.vgrow="ALWAYS">
               <columns>
-                <TableColumn fx:id="idParticipante" prefWidth="75.0" text="Id" />
-                <TableColumn fx:id="nombreParticipante" prefWidth="75.0" text="Nombre" />
-                <TableColumn fx:id="apellido1Participante" prefWidth="75.0" text="Apellido1" />
-                <TableColumn fx:id="apellido2Participante" prefWidth="75.0" text="Apellido2" />
-                <TableColumn fx:id="emailParticipante" prefWidth="75.0" text="correo" />
+                <TableColumn fx:id="idArtista" prefWidth="75.0" text="Id" />
+                <TableColumn fx:id="nombreArtista" prefWidth="75.0" text="Nombre" />
+                <TableColumn fx:id="apellido1Artista" prefWidth="75.0" text="Apellido1" />
+                <TableColumn fx:id="apellido2Artista" prefWidth="75.0" text="Apellido2" />
+                <TableColumn fx:id="fotografiaArtista" prefWidth="75.0" text="Fotografia" />
+                <TableColumn fx:id="obraDestacadaArtista" prefWidth="75.0" text="ObraDestacada" />
               </columns>
                
             </TableView>
@@ -54,8 +55,8 @@
       </HBox>
       <HBox alignment="CENTER" prefHeight="67.0" prefWidth="757.0">
          <children>
-            <Button fx:id="añadirparticipante" mnemonicParsing="false" onAction="#addRow" text="Añadir" />
-            <Button fx:id="borrarparticipante" mnemonicParsing="false" onAction="#deleteRow" text="Borrar">
+            <Button fx:id="añadirartista" mnemonicParsing="false" onAction="#addRow" text="Añadir" />
+            <Button fx:id="borrarartista" mnemonicParsing="false" onAction="#deleteRow" text="Borrar">
                <HBox.margin>
                   <Insets left="50.0" />
                </HBox.margin>

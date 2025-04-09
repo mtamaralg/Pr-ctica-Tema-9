@@ -87,4 +87,19 @@ public abstract class Persona {
         return con;
     }
     
+    public static int getLastId() {
+        Connection con = conectarBD();
+        int id = 0;
+        try {
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("SELECT MAX(id) FROM PERSONA");
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return id;
+    }
 }

@@ -10,6 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.fxml.FXML;
@@ -17,6 +18,9 @@ import javafx.fxml.FXML;
 public class categoriaController {
     @FXML
     TableView<Categoria> tablaCategoria;
+
+    @FXML
+    TextField buscar;
 
     @FXML
     private TableColumn<Categoria, Integer> idColumna;
@@ -80,6 +84,17 @@ public class categoriaController {
         }
     }
     @FXML
+        public void Buscar() throws IOException {
+            String busca = buscar.getText();
+            listaCategorias.clear();
+
+            if(busca.isEmpty()){
+                loadData();
+            }else{
+                Categoria.get(busca,listaCategorias);
+            }
+        }
+    @FXML
     public void primary() throws IOException {
         App.setRoot("primary");}
     
@@ -90,4 +105,8 @@ public class categoriaController {
     @FXML
     public void participante() throws IOException {
         App.setRoot("participante");}
+
+    @FXML
+    public void artista() throws IOException {
+        App.setRoot("artista");}
 }

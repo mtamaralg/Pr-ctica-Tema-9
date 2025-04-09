@@ -10,6 +10,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.fxml.FXML;
@@ -17,6 +18,9 @@ import javafx.fxml.FXML;
 public class eventoController {
     @FXML
     TableView<Evento> tablaEvento;
+
+    @FXML
+    TextField buscar;
 
     @FXML
     private TableColumn<Evento, Integer> idEventoColumna;
@@ -125,6 +129,19 @@ public class eventoController {
                     evento.delete();
                 }
             }
+        
+        }
+
+        @FXML
+        public void Buscar() throws IOException {
+            String busca = buscar.getText();
+            listaEventos.clear();
+
+            if(busca.isEmpty()){
+                loadData();
+            }else{
+                Evento.get(busca,listaEventos);
+            }
         }
         @FXML
         public void Principal() throws IOException {
@@ -139,4 +156,8 @@ public class eventoController {
         @FXML
         public void Evento() throws IOException {
             App.setRoot("evento");}
+
+        @FXML
+        public void Artista() throws IOException {
+            App.setRoot("artista");}
 }

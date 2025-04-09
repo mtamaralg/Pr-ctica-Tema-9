@@ -114,7 +114,8 @@ public class Evento {
         return e;
     }
 
-    public void get(String txt){
+    public static void get(String txt, ObservableList<Evento> listaEventos){
+
         Connection con = conectarBD();
         listaEventos.clear();
         try {
@@ -186,19 +187,6 @@ public class Evento {
     public Categoria getCategoria(){
         Categoria c = Categoria.get(this.getId_categoria());
         return c;
-       /*
-        Connection con = conectarBD();
-        try {
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM CATEGORIA WHERE id = " + this.getId_categoria());
-            if (rs.next()) {
-                Categoria c = new Categoria()
-            }
-            con.close();
-        } catch (Exception e) {
-            System.out.println("Error de SQL: " + e.getMessage());
-        }
-            */
     }
 
     public static Connection conectarBD(){

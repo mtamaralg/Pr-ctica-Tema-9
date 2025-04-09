@@ -9,6 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.fxml.FXML;
@@ -17,6 +18,9 @@ public class participanteController {
 
     @FXML
     TableView<Participante> tablaParticipante;
+
+    @FXML
+    TextField buscar;
 
     @FXML
     private TableColumn<Participante, Integer> idParticipante;
@@ -38,23 +42,23 @@ public class participanteController {
     private ObservableList<Participante> listaParticipantes = FXCollections.observableArrayList();
 
     public void initialize(){
-        idParticipante.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idParticipante.setCellValueFactory(new PropertyValueFactory<>("id_Participante"));
         nombreParticipante.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         apellido1Participante.setCellValueFactory(new PropertyValueFactory<>("apellido1"));
         apellido2Participante.setCellValueFactory(new PropertyValueFactory<>("apellido2"));
         emailParticipante.setCellValueFactory(new PropertyValueFactory<>("correo"));
 
-       // emailParticipante.setCellFactory(TextFieldTableCell.forTableColumn());
+        emailParticipante.setCellFactory(TextFieldTableCell.forTableColumn());
         nombreParticipante.setCellFactory(TextFieldTableCell.forTableColumn());
         apellido1Participante.setCellFactory(TextFieldTableCell.forTableColumn());
         apellido2Participante.setCellFactory(TextFieldTableCell.forTableColumn());
 
 
-        // emailParticipante.setOnEditCommit(event -> {
-        //     Participante participante = event.getRowValue();
-        //     participante.setemail(event.getNewValue());
-        //     saveRow(participante);
-        // });
+        emailParticipante.setOnEditCommit(event -> {
+            Participante participante = event.getRowValue();
+            participante.setCorreo(event.getNewValue());
+           saveRow(participante);
+        });
         nombreParticipante.setOnEditCommit(event -> {
             Participante participante = event.getRowValue();
             participante.setNombre(event.getNewValue());
@@ -82,7 +86,7 @@ public class participanteController {
 
     @FXML
     public void addRow() {
-        Participante participante = new Participante(Participante.getId() + 1, "", "", "", "");
+        Participante participante = new Participante(Persona.getLastId() + 1, "", "", "", "");
         listaParticipantes.add(participante);
         
     }
@@ -108,6 +112,18 @@ public class participanteController {
     }
 
     @FXML
+        public void Buscar() throws IOException {
+            String busca = buscar.getText();
+            listaParticipantes.clear();
+
+            if(busca.isEmpty()){
+                loadData();
+            }else{
+                Participante.get(busca,listaParticipantes);
+            }
+        }
+
+    @FXML
     public void evento() throws IOException {
         App.setRoot("evento");
     }
@@ -119,6 +135,9 @@ public class participanteController {
     public void primary() throws IOException {
         App.setRoot("primary");
     }
+    @FXML
+    public void artista() throws IOException {
+        App.setRoot("artista");}
 
 }   
     
